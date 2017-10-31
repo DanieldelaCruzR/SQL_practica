@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 /**
@@ -39,8 +40,13 @@ public class EliminarFragment extends Fragment {
         bEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int id = Integer.parseInt(eId.getText().toString());
-                dbLibros.delete("Libros","id='"+id+"'",null);
+
+                if(eId.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"Complete campo ID",Toast.LENGTH_SHORT).show();
+                }else{
+                    int id = Integer.parseInt(eId.getText().toString());
+                    dbLibros.delete("Libros","id='"+id+"'",null);
+                }
             }
         });
         return view;
